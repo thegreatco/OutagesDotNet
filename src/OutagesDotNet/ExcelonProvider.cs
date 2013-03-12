@@ -13,16 +13,17 @@ namespace OutagesDotNet
     /// <summary>
     /// The jcpl provider.
     /// </summary>
-    public class JcplProvider
+    public class ExcelonProvider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.
         /// </summary>
-        /// <returns> An await-able <see cref="Task"/> containing the outage results. </returns>
-        public async Task<IEnumerable<Outage>> GetCurrentData()
+        /// <param name="sa"> The service area. </param>
+        /// <returns> An await-able <see cref="Task"/> containing the outage results.   </returns>
+        public async Task<IEnumerable<Outage>> GetCurrentData(ServiceArea sa)
         {
-            var regex = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}\w{2}");
-            var xmlUri = new Uri("http://outages.firstenergycorp.com/data/alerts/metadataNJ.xml");
+            var regex = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}\w{2,4}(?=<)");
+            var xmlUri = new Uri(string.Format("http://outages.firstenergycorp.com/data/alerts/metadata{0}.xml", sa));
             var client = new HttpClient();
             var xmlString = await client.GetStringAsync(xmlUri);
             var lastUpdate = regex.Match(xmlString).Value;

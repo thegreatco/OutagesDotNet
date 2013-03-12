@@ -17,11 +17,10 @@ namespace JCPL.Tests
         /// Outputs just the currently listed outages.
         /// </summary>
         [Test]
-        public async void OutagesOnly()
+        public async void OutagesOnlyNj()
         {
-            // http://outages.firstenergycorp.com/data/interval_generation_data/2013_03_12_12_32_23NJ/report.js?timestamp=1363106470621
-            var stuff = new JcplProvider();
-            var outages = await stuff.GetCurrentData();
+            var stuff = new ExcelonProvider();
+            var outages = await stuff.GetCurrentData(ServiceArea.NJ);
             foreach (var outage in outages.Where(x => x.Out > 0))
             {
                 Console.WriteLine("{0}: {1}", outage.City, outage.Out);
@@ -29,14 +28,30 @@ namespace JCPL.Tests
         }
 
         /// <summary>
+        /// Outputs just the currently listed outages.
+        /// </summary>
+        [Test]
+        public async void OutagesAll()
+        {
+            var stuff = new ExcelonProvider();
+            foreach (ServiceArea state in Enum.GetValues(typeof(ServiceArea)))
+            {
+                var outages = await stuff.GetCurrentData(state);
+                foreach (var outage in outages.Where(x => x.Out > 0))
+                {
+                    Console.WriteLine("{0}: {1}", outage.City, outage.Out);
+                }
+            }
+        }
+
+        /// <summary>
         /// Outputs all the data returned by the provider.
         /// </summary>
         [Test]
-        public async void AllData()
+        public async void AllDataNj()
         {
-            // http://outages.firstenergycorp.com/data/interval_generation_data/2013_03_12_12_32_23NJ/report.js?timestamp=1363106470621
-            var stuff = new JcplProvider();
-            var outages = await stuff.GetCurrentData();
+            var stuff = new ExcelonProvider();
+            var outages = await stuff.GetCurrentData(ServiceArea.NJ);
             foreach (var outage in outages)
             {
                 if (outage.Served > 0)
@@ -45,6 +60,31 @@ namespace JCPL.Tests
                     Console.WriteLine("{4}{0}: {1} of {2} ({3}%)", outage.City, outage.Out, outage.Served, percentOut, percentOut > 0d ? "----> " : string.Empty);
                 }
                 else Console.WriteLine("{0}: {1} of {2}", outage.City, outage.Out, outage.Served);
+            }
+        }
+
+        /// <summary>
+        /// Outputs all the data returned by the provider.
+        /// </summary>
+        [Test]
+        public async void AllDataAll()
+        {
+            var stuff = new ExcelonProvider();
+            foreach (ServiceArea state in Enum.GetValues(typeof(ServiceArea)))
+            {
+                Console.WriteLine("Getting Information for {0}", state);
+                var outages = await stuff.GetCurrentData(state);
+                foreach (var outage in outages)
+                {
+                    if (outage.Served > 0)
+                    {
+                        double percentOut = ((double)outage.Out / (double)outage.Served) * 100;
+                        Console.WriteLine("{4}{0}: {1} of {2} ({3}%)", outage.City, outage.Out, outage.Served, percentOut, percentOut > 0d ? "----> " : string.Empty);
+                    }
+                    else Console.WriteLine("{0}: {1} of {2}", outage.City, outage.Out, outage.Served);
+                }
+                Console.WriteLine(string.Empty);
+                Console.WriteLine(string.Empty);
             }
         }
     }

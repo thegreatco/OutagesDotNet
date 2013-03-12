@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JcplProvider.cs" />
+    <Compile Include="ExcelonProvider.cs" />
     <Compile Include="Outage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PsegProvider.cs" />
+    <Compile Include="States.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
