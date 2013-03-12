@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
@@ -20,11 +21,15 @@ namespace OutagesDotNet
         /// <returns> An await-able <see cref="Task"/> containing the outage results. </returns>
         public async Task<IEnumerable<Outage>> GetCurrentData()
         {
-            const string Url = "http://outages.firstenergycorp.com/data/interval_generation_data/{0}NJ/report.js?timestamp={1}";
-            var uri = new Uri(string.Format(Url, "2013_03_08_19_04_31", SecondsSinceEpoch()));
+            var regex = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}\w{2}");
+            var xmlUri = new Uri("http://outages.firstenergycorp.com/data/alerts/metadataNJ.xml");
             var client = new HttpClient();
-            var httpClientStream = await client.GetStreamAsync(uri);
-            var json = new JsonSerializer().Deserialize<dynamic>(new JsonTextReader(new StreamReader(httpClientStream)));
+            var xmlString = await client.GetStringAsync(xmlUri);
+            var lastUpdate = regex.Match(xmlString).Value;
+            const string Url = "http://outages.firstenergycorp.com/data/interval_generation_data/{0}/report.js?timestamp={1}";
+            var uri = new Uri(string.Format(Url, lastUpdate, SecondsSinceEpoch()));
+            var jsonStream = await client.GetStreamAsync(uri);
+            var json = new JsonSerializer().Deserialize<dynamic>(new JsonTextReader(new StreamReader(jsonStream)));
             return ParseResults(json);
         }
 
@@ -68,7 +73,7 @@ namespace OutagesDotNet
 
         private static string SecondsSinceEpoch()
         {
-            var diff = (DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds;
+            var diff = Math.Round((DateTime.Now - new DateTime(1970, 1, 1)).TotalMilliseconds, 0);
             return diff.ToString(CultureInfo.InvariantCulture);
         }
     }
