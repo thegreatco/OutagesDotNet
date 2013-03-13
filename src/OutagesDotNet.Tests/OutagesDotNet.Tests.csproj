@@ -54,6 +54,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ComEdTests.cs" />
+    <Compile Include="PecoTests.cs" />
     <Compile Include="PsegTests.cs" />
     <Compile Include="JcplTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
