@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComEdProvider.cs" />
+    <Compile Include="IEnergyProvider.cs" />
     <Compile Include="ExcelonProvider.cs" />
     <Compile Include="Outage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

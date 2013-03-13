@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-using OutagesDotNet;
-
 using NUnit.Framework;
 
-namespace JCPL.Tests
+namespace OutagesDotNet.Tests
 {
     /// <summary>
     /// The tests for the JSPL Outage Provider.

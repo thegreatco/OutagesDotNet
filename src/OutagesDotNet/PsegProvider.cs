@@ -13,13 +13,14 @@ namespace OutagesDotNet
     /// <summary>
     /// The PSE G provider.
     /// </summary>
-    public class PsegProvider
+    public class PsegProvider : IEnergyProvider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.
         /// </summary>
-        /// <returns> An await-able <see cref="Task"/> containing the outage results. </returns>
-        public async Task<IEnumerable<Outage>> GetCurrentData()
+        /// <param name="sa"> The service area. Not used by all providers. </param>
+        /// <returns> An await-able <see cref="Task"/> containing the outage results.  </returns>
+        public async Task<IEnumerable<Outage>> GetCurrentData(ServiceArea sa)
         {
             const string Url = "http://www.pseg.com/outagemap/Customer%20Outage%20Application/Web%20Pages/GML/State.gml?randomVar={0}";
             var uri = new Uri(string.Format(Url, RandomVar()));

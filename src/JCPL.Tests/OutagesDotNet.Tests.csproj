@@ -6,8 +6,8 @@
     <ProjectGuid>{C5AA66C1-58B5-47D0-9E14-813CB4257872}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JCPL.Tests</RootNamespace>
-    <AssemblyName>JCPL.Tests</AssemblyName>
+    <RootNamespace>OutagesDotNet.Tests</RootNamespace>
+    <AssemblyName>OutagesDotNet.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,6 +53,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ComEdTests.cs" />
     <Compile Include="PsegTests.cs" />
     <Compile Include="JcplTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

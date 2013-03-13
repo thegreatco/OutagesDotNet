@@ -13,7 +13,7 @@ namespace OutagesDotNet
     /// <summary>
     /// The jcpl provider.
     /// </summary>
-    public class ExcelonProvider
+    public class ExcelonProvider : IEnergyProvider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.
