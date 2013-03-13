@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OutagesDotNet
+namespace OutagesDotNet.ComEd
 {
     /// <summary>
-    /// The states.
+    /// The service areas covered by the provider.
     /// </summary>
     public enum ServiceArea
     {
-        NJ,
-        PA,
-        OH,
-        MDWV
+        IL
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace OutagesDotNet
+namespace OutagesDotNet.Pseg
 {
     /// <summary>
     /// The PSE G provider.
     /// </summary>
-    public class PsegProvider : IEnergyProvider
+    public class Provider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.

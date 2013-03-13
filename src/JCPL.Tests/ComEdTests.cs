@@ -5,6 +5,8 @@ using System.Linq;
 
 using NUnit.Framework;
 
+using OutagesDotNet.ComEd;
+
 namespace OutagesDotNet.Tests
 {
     /// <summary>
@@ -19,8 +21,8 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void OutagesOnly()
         {
-            var stuff = new ComEdProvider();
-            var outages = await stuff.GetCurrentData(ServiceArea.NJ);
+            var stuff = new Provider();
+            var outages = await stuff.GetCurrentData(ServiceArea.IL);
             foreach (var outage in outages.Where(x => x.Out > 0))
             {
                 Console.WriteLine("{0}: {1}", outage.City, outage.Out);
@@ -33,8 +35,8 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void AllData()
         {
-            var stuff = new ExcelonProvider();
-            var outages = await stuff.GetCurrentData(ServiceArea.NJ);
+            var stuff = new Provider();
+            var outages = await stuff.GetCurrentData(ServiceArea.IL);
             foreach (var outage in outages)
             {
                 if (outage.Served > 0)

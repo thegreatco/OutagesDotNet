@@ -43,13 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComEdProvider.cs" />
-    <Compile Include="IEnergyProvider.cs" />
-    <Compile Include="ExcelonProvider.cs" />
+    <Compile Include="ComEd\Provider.cs" />
+    <Compile Include="ComEd\ServiceArea.cs" />
+    <Compile Include="Excelon\Provider.cs" />
     <Compile Include="Outage.cs" />
+    <Compile Include="Peco\Provider.cs" />
+    <Compile Include="Peco\ServiceArea.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PsegProvider.cs" />
-    <Compile Include="States.cs" />
+    <Compile Include="Pseg\Provider.cs" />
+    <Compile Include="Excelon\ServiceArea.cs" />
+    <Compile Include="Pseg\ServiceArea.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

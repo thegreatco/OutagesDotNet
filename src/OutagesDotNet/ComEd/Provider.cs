@@ -4,24 +4,23 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace OutagesDotNet
+namespace OutagesDotNet.ComEd
 {
     /// <summary>
     /// The provider for the Commonwealth Edison Utility in Illinois.
     /// </summary>
-    public class ComEdProvider : IEnergyProvider
+    public class Provider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.
         /// </summary>
         /// <param name="sa"> The service area. </param>
-        /// <returns> An await-able <see cref="Task"/> containing the outage results.   </returns>
+        /// <returns> An await-able <see cref="Task"/> containing the outage results. </returns>
         public async Task<IEnumerable<Outage>> GetCurrentData(ServiceArea sa)
         {
             var regex = new Regex(@"\d{4}_\d{2}_\d{2}_\d{2}_\d{2}_\d{2}\w{0,4}(?=<)");

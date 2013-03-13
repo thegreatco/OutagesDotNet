@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 
-using OutagesDotNet;
-
 using NUnit.Framework;
 
-namespace JCPL.Tests
+using OutagesDotNet.Pseg;
+
+namespace OutagesDotNet.Tests
 {
     /// <summary>
     /// The tests for the PSE G Outage Provider.
@@ -19,8 +19,8 @@ namespace JCPL.Tests
         [Test]
         public async void TestMethod1()
         {
-            var stuff = new PsegProvider();
-            var outages = await stuff.GetCurrentData();
+            var stuff = new Provider();
+            var outages = await stuff.GetCurrentData(ServiceArea.NJ);
             foreach (var outage in outages.Where(x => x.Out > 0))
             {
                 Console.WriteLine("{0}: {1}", outage.City, outage.Out);

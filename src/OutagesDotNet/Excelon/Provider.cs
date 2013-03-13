@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 using Newtonsoft.Json;
 
-namespace OutagesDotNet
+namespace OutagesDotNet.Excelon
 {
     /// <summary>
     /// The jcpl provider.
     /// </summary>
-    public class ExcelonProvider : IEnergyProvider
+    public class Provider
     {
         /// <summary>
         /// Gets the current outage data from the electrical supplier.

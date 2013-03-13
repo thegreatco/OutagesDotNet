@@ -3,6 +3,8 @@ using System.Linq;
 
 using NUnit.Framework;
 
+using OutagesDotNet.Excelon;
+
 namespace OutagesDotNet.Tests
 {
     /// <summary>
@@ -17,7 +19,7 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void OutagesOnlyNj()
         {
-            var stuff = new ExcelonProvider();
+            var stuff = new Provider();
             var outages = await stuff.GetCurrentData(ServiceArea.NJ);
             foreach (var outage in outages.Where(x => x.Out > 0))
             {
@@ -31,7 +33,7 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void OutagesAll()
         {
-            var stuff = new ExcelonProvider();
+            var stuff = new Provider();
             foreach (ServiceArea state in Enum.GetValues(typeof(ServiceArea)))
             {
                 var outages = await stuff.GetCurrentData(state);
@@ -48,7 +50,7 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void AllDataNj()
         {
-            var stuff = new ExcelonProvider();
+            var stuff = new Provider();
             var outages = await stuff.GetCurrentData(ServiceArea.NJ);
             foreach (var outage in outages)
             {
@@ -67,7 +69,7 @@ namespace OutagesDotNet.Tests
         [Test]
         public async void AllDataAll()
         {
-            var stuff = new ExcelonProvider();
+            var stuff = new Provider();
             foreach (ServiceArea state in Enum.GetValues(typeof(ServiceArea)))
             {
                 Console.WriteLine("Getting Information for {0}", state);
