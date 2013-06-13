@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutagesDotNet", "src\OutagesDotNet\OutagesDotNet.csproj", "{CD94DA00-1A56-4A2F-A55E-1BB49A745E7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutagesDotNet.Tests", "src\JCPL.Tests\OutagesDotNet.Tests.csproj", "{C5AA66C1-58B5-47D0-9E14-813CB4257872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutagesDotNet.Tests", "src\OutagesDotNet.Tests\OutagesDotNet.Tests.csproj", "{C5AA66C1-58B5-47D0-9E14-813CB4257872}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{550DA011-A9AA-4680-A9C8-1C5E42827CD7}"
 	ProjectSection(SolutionItems) = preProject
