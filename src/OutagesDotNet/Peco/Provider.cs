@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 using HtmlAgilityPack;
 
-using Newtonsoft.Json;
-
 namespace OutagesDotNet.Peco
 {
     /// <summary>
@@ -21,7 +19,7 @@ namespace OutagesDotNet.Peco
         /// </summary>
         /// <param name="sa"> The service area. </param>
         /// <returns> An await-able <see cref="Task"/> containing the outage results. </returns>
-        public async Task<IEnumerable<Outage>> GetCurrentData(ServiceArea sa)
+        public async Task<IEnumerable<ProviderStatus>> GetCurrentData(ServiceArea sa)
         {
             var client = new HttpClient();
             const string Url = "https://www.peco.com/CustomerService/OutageCenter/OutageMap/Pages/CountyDetails.aspx?County={0}";
@@ -30,9 +28,9 @@ namespace OutagesDotNet.Peco
             return ParseResults(htmlStream, sa);
         }
 
-        private static IEnumerable<Outage> ParseResults(Stream htmlStream, ServiceArea sa)
+        private static IEnumerable<ProviderStatus> ParseResults(Stream htmlStream, ServiceArea sa)
         {
-            var outages = new List<Outage>();
+            var outages = new List<ProviderStatus>();
             var doc = new HtmlDocument();
             doc.Load(htmlStream);
             foreach (var tables in doc.DocumentNode.SelectNodes("//div[contains(@id,'outageMapTownshipInformation')]//table").Where(x => x.SelectNodes("thead") != null))
@@ -43,13 +41,14 @@ namespace OutagesDotNet.Peco
                     var subNodes = node.SelectNodes("td");
                     int custsOut;
                     int.TryParse(subNodes[1].InnerText, out custsOut);
-                    var outage = new Outage
+                    var outage = new ProviderStatus
                         {
                             City = subNodes[0].InnerText,
                             State = "Pennsylvania",
                             County = sa.ToString(),
                             Out = custsOut,
-                            Served = null
+                            Served = null,
+                            Provider = "PECO"
                         };
                     outages.Add(outage);
                 }

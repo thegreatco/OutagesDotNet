@@ -58,7 +58,7 @@ namespace OutagesDotNet.Tests
                 {
                     if (outage.Out != null && outage.Served != null)
                     {
-                        double percentOut = ((double)outage.Out / (double)outage.Served) * 100;
+                        var percentOut = Math.Round(((double)outage.Out / (double)outage.Served) * 100, 2);
                         Console.WriteLine("{5}{0}, {1}: {2} of {3} ({4}%)", outage.City, outage.State, outage.Out, outage.Served, percentOut, percentOut > 0d ? "----> " : string.Empty);
                     }
                 }
@@ -83,7 +83,7 @@ namespace OutagesDotNet.Tests
                     {
                         if (outage.Out != null && outage.Served != null)
                         {
-                            double percentOut = ((double)outage.Out / (double)outage.Served) * 100;
+                            var percentOut = Math.Round(((double)outage.Out / (double)outage.Served) * 100, 2);
                             Console.WriteLine("{5}{0}, {1}: {2} of {3} ({4}%)", outage.City, outage.State, outage.Out, outage.Served, percentOut, percentOut > 0d ? "----> " : string.Empty);
                         }
                     }
